@@ -34,6 +34,20 @@ export class AppComponent implements OnInit {
     console.log(this.volunteerForm);
   }
 
+  selectLocation(event) : void {
+    this.volunteerForm.patchValue({
+      preferredLocation: event.target.value
+    });
+  }
+
+  addEmail(): void {
+    this.references.push(this.fb.control(''))
+  }
+
+  removeEmail(index: number): void {
+    this.references.removeAt(index);
+  }
+
   get references(): FormArray {
     return this.volunteerForm.get('references') as FormArray;
   }

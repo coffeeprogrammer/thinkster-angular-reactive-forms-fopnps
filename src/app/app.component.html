@@ -7,32 +7,35 @@
   </label>
 	<label>
     Phone Number:
-    <input type="text" placeholder="required">
+    <input type="text" formControlName="phoneNumber" placeholder="required">
   </label>
   <label>Select Preferred Location:</label>
-  <select>
+  <select formControlName="preferredLocation" (change)="selectLocation($event)">
     <option *ngFor="let loc of locations" [ngValue]="loc">{{loc}}</option>
   </select>
   <h2>Please select what animals you're comfortable working with, if any:</h2>
-  <div class="grouping">
+  <div formGroupName="animals" class="grouping">
     <label>Dogs
-      <input type="checkbox">
+      <input formControlName="dogs" type="checkbox">
     </label>
     <label>Cats
-      <input type="checkbox">
+      <input formControlName="cats" type="checkbox">
     </label>
     <label>Reptiles
-      <input type="checkbox">
+      <input formControlName="reptiles" type="checkbox">
     </label>
   </div>
   <h2>Reference(s)</h2>
-  <div class="grouping">
+  <div formArrayName="references" *ngFor="let ref of references.controls;
+          let i = index" class="grouping">
     <label>
       Reference Email: 
-      <input type="text" placeholder="optional">
-      <button type="button" id="remove_email">X</button>
+      <input [formControlName]="i" type="text"
+       placeholder="optional">
+      <button type="button" (click)="removeEmail(i)"
+      id="remove_email">X</button>
     </label>
   </div>
-  <button type="button">Add Another Reference</button>
-	<button id="apply_button">Apply</button>
+  <button type="button" (click)="addEmail()">Add Another Reference</button>
+	<button id="apply_button" (click)="onSubmit()">Apply</button>
 </form>
