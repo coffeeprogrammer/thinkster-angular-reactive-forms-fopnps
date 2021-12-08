@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   }
   initializeForm(): void {
     this.volunteerForm = this.fb.group({
-
       name: 'name here',
       phoneNumber: '',
       preferredLocation: '',
@@ -28,16 +27,12 @@ export class AppComponent implements OnInit {
           reptiles: false
       }),
       references: this.fb.array([this.fb.control('')])
-    
-
     });
   }
 
   onSubmit(): void {
     console.log(this.volunteerForm);
-
   }
-
 
   get references(): FormArray {
     return this.volunteerForm.get('references') as FormArray;
